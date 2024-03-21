@@ -1,12 +1,11 @@
 // import Image from "next/image";
 
-import Header from "@/components/Header";
+import Header from "@/components/header";
 
-const Home = () => {
+export default function Home() {
   return (
-    <main className="">
+    <h1 className="text-3xl font-bold underline">
       <Header />
-    </main>
+    </h1>
   );
-};
-export default Home;
+}
