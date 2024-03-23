@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { Montserrat } from "next/font/google";
 import { usePathname } from "next/navigation";
-
+import styles from "./index.module.css";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 import React, { useState, useEffect } from "react";
@@ -10,6 +10,7 @@ import React, { useState, useEffect } from "react";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,19 +25,42 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!isMenuOpen) {
+    }
+  }, [isMenuOpen]);
+
   const isRootRoute = pathname === "/";
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <div className={`${montserrat.className} antialised text-center text-5xl`}>
+    <div className={`${montserrat.className} antialised items-start text-5xl`}>
+      {/* <div
+        className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""} ${
+          isScrolled && styles.opacity50
+        }`}
+        style={{ backgroundColor: isRootRoute ? "" : "#161C2D" }}
+      ></div> */}
+
       <div
-        className={`navbar font-semibold text-white fixed w-full inset-x-0 top-0 flex justify-between items-center z-50 ${
+        className={`${
+          styles.navbar
+        } font-semibold text-white fixed w-full inset-x-0 top-0 flex justify-between  z-50 ${
           isScrolled ? "bg-slate-600" : ""
         } ${isScrolled && "opacity-50"}`}
         style={{ backgroundColor: isRootRoute ? "" : "#161C2D" }}
       >
-        <div className="navbar-start flex items-center">
+        <div className="navbar-start flex ">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost lg:hidden"
+              onClick={toggleMenu}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-8 w-8"
@@ -52,74 +76,150 @@ const Navbar = () => {
                 />
               </svg>
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52"
-              style={{ backgroundColor: "#40b3a2", zIndex: 0 }}
-            >
-              <li>
-                <a>Nosotros</a>
-                <ul className="p-2">
-                  <li>
-                    <Link href="/contactenos">Contáctenos</Link>
-                  </li>
-                  <li>
-                    <Link href="/quienesSomos">Quienes Somos</Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>Equípate</a>
-                <ul className="p-2">
-                  <li>
-                    <Link href="/articulos">Articulos</Link>
-                  </li>
-                  <li>
-                    <Link href="/doctrina">Doctrina</Link>
-                  </li>
-                  <li>
-                    <Link href="/herramientas">Herramientas</Link>
-                  </li>
-                  <li>
-                    <Link href="/peliculas">Peliculas</Link>
-                  </li>
-                  <li>
-                    <Link href="/videosVisuales">Videos</Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <Link href="/devocionales">Devocionales</Link>
-              </li>
-              <li>
-                <Link href="/discipulado">Discipulado</Link>
-              </li>
-              <button className="">
-                <li>
-                  <Link href="/login">login</Link>
+            {isMenuOpen && (
+              <ul
+                tabIndex={0}
+                className={`${styles.menu} w-screen menu menu-sm dropdown-content mt-3 z-[1] p-2 `}
+                style={{ backgroundColor: "#fff", zIndex: 0 }}
+              >
+                <div className="collapse collapse-arrow border text-black hover:text-[#b3794f] ">
+                  <div className="collapse collapse-arrow">
+                    <input type="checkbox" />
+                    <div className="collapse-title text-xl font-medium ">
+                      Nosotros
+                    </div>
+                    <div className="collapse-content">
+                      <ul className="p-2">
+                        <li className="">
+                          <Link
+                            href="/contactenos"
+                            className="text-[18px]  mb-3 text-black"
+                          >
+                            Contáctenos
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/quienesSomos"
+                            className="text-[18px]  text-black"
+                          >
+                            Quienes Somos
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="collapse-content"></div>
+                </div>
+
+                <div className="collapse collapse-arrow border border-base-300 mt-3  text-black hover:text-[#b3794f]">
+                  <div className="collapse collapse-arrow">
+                    <input type="checkbox" />
+                    <div className="collapse-title text-xl font-medium ">
+                     Equípanos
+                    </div>
+
+                    <div className="collapse-content">
+                      <ul className="p-2">
+                        <li>
+                          <Link
+                            href="/articulos"
+                            className="text-[18px]  mt-3 text-black"
+                          >
+                            Articulos
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/doctrina"
+                            className="text-[18px]  my-3 text-black"
+                          >
+                            Doctrina
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/herramientas"
+                            className="text-[18px]  text-black"
+                          >
+                            Herramientas
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/peliculas"
+                            className="text-[18px]  my-3 text-black"
+                          >
+                            Peliculas
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/videosVisuales"
+                            className="text-black text-[18px] "
+                          >
+                            Videos
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <li className="text-black font-medium mt-8">
+                  <Link href="/devocionales" className="text-[20px] text-black">
+                    Devocionales
+                  </Link>
                 </li>
-              </button>
-            </ul>
+                <li className="text-black font-medium text-2xl ">
+                  <Link
+                    href="/discipulado"
+                    className="text-[20px] text-black my-10"
+                  >
+                    Discipulado
+                  </Link>
+                </li>
+                <button className="items-start text-black font-medium">
+                  <li className="items-start">
+                    <Link
+                      href="/login"
+                      className="text-[20px] mb-6 items-start"
+                    >
+                      login
+                    </Link>
+                  </li>
+                </button>
+              </ul>
+            )}
           </div>
           <Link href="/" className="btn btn-ghost text-2xl font-bold">
             Logo
           </Link>
         </div>
-        <div className="navbar-end lg:flex">
+        <div className=" lg:flex">
           <div className="hidden lg:flex">
-            <ul className="menu menu-horizontal">
+            <ul
+              className={`${styles.menuHorizontal} ${styles.menu}  flex-nowrap`}
+            >
               <li>
                 <details>
-                  <summary className="">Nosotros</summary>
+                  <summary className="text-[20px]  ">Nosotros</summary>
                   <ul
                     className="px-2"
-                    style={{ backgroundColor: "#40b3a2", zIndex: 0 }}
+                    style={{ backgroundColor: "#fff", zIndex: 0 }}
                   >
                     <li>
-                      <Link href="/contactenos">Contáctenos</Link>
+                      <Link
+                        href="/contactenos"
+                        className="text-black text-[18px]"
+                      >
+                        Contáctenos
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/quienesSomos" className="text-center">
+                      <Link
+                        href="/quienesSomos"
+                        className="text-black text-center  text-[18px]"
+                      >
                         Quienes Somos
                       </Link>
                     </li>
@@ -129,40 +229,47 @@ const Navbar = () => {
 
               <li>
                 <details>
-                  <summary>Características</summary>
+                  <summary className="text-[20px] ">Características</summary>
                   <ul
                     className="p-2"
-                    style={{ backgroundColor: "#40b3a2", zIndex: 0 }}
+                    style={{
+                      backgroundColor: "#fff",
+                      zIndex: 0,
+                      marginLeft: "10px",
+                    }}
                   >
-                    <li>
+                    <li className="text-black text-center  text-[18px]">
                       <Link href="/articulos">Articulos</Link>
                     </li>
-                    <li>
+                    <li className="text-black text-center  text-[18px]">
                       <Link href="/doctrina">Doctrina</Link>
                     </li>
-                    <li>
+                    <li className="text-black text-center  text-[18px]">
                       <Link href="/herramientas">Herramientas</Link>
                     </li>
-                    <li>
+                    <li className="text-black text-center  text-[18px]">
                       <Link href="/peliculas">Peliculas</Link>
                     </li>
-                    <li>
+                    <li className="text-black text-center  text-[18px]">
                       <Link href="/videosVisuales">Videos</Link>
                     </li>
                   </ul>
                 </details>
               </li>
               <li>
-                <Link href="/devocionales">Devocionales</Link>
+                <Link href="/devocionales" className="text-[20px]">
+                  Devocionales
+                </Link>
               </li>
               <li>
-                <Link href="/discipulado">Discipulado</Link>
+                <Link href="/discipulado" className="text-[20px]">
+                  Discipulado
+                </Link>
               </li>
-              <button className="">
-                <li>
-                  <Link href="/login">login</Link>
-                </li>
-              </button>
+
+              <li className="text-[20px] ">
+                <Link href="/login">login</Link>
+              </li>
             </ul>
           </div>
         </div>
