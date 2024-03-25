@@ -3,15 +3,16 @@ import Link from "next/link";
 import { Montserrat } from "next/font/google";
 import { usePathname } from "next/navigation";
 import styles from "./index.module.css";
-const montserrat = Montserrat({ subsets: ["latin"] });
-
 import React, { useState, useEffect } from "react";
+import router from "next/router";
+import { useRouter } from "next/router";
 
+const montserrat = Montserrat({ subsets: ["latin"] });
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const pathname = usePathname();
+  
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -26,6 +27,10 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
+    setIsMenuOpen(false); 
+  }, [pathname]);
+
+  useEffect(() => {
     if (!isMenuOpen) {
     }
   }, [isMenuOpen]);
@@ -36,22 +41,17 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+
+
   return (
     <div className={`${montserrat.className} antialised items-start text-5xl`}>
-      {/* <div
-        className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""} ${
-          isScrolled && styles.opacity50
-        }`}
-        style={{ backgroundColor: isRootRoute ? "" : "#161C2D" }}
-      ></div> */}
-
       <div
         className={`${
           styles.navbar
         } font-semibold text-white fixed w-full inset-x-0 top-0 flex justify-between  z-50 ${
           isScrolled ? "bg-slate-600" : ""
         } ${isScrolled && "opacity-50"}`}
-        style={{ backgroundColor: isRootRoute ? "" : "#161C2D" }}
+        style={{ backgroundColor: isRootRoute ? "" : "" }}
       >
         <div className="navbar-start flex ">
           <div className="dropdown">
@@ -76,6 +76,9 @@ const Navbar = () => {
                 />
               </svg>
             </div>
+            <Link href="/" className="btn btn-ghost text-2xl font-bold">
+              Logo
+            </Link>
             {isMenuOpen && (
               <ul
                 tabIndex={0}
@@ -116,7 +119,7 @@ const Navbar = () => {
                   <div className="collapse collapse-arrow">
                     <input type="checkbox" />
                     <div className="collapse-title text-xl font-medium ">
-                     Equípanos
+                      Equípanos
                     </div>
 
                     <div className="collapse-content">
@@ -191,12 +194,9 @@ const Navbar = () => {
               </ul>
             )}
           </div>
-          <Link href="/" className="btn btn-ghost text-2xl font-bold">
-            Logo
-          </Link>
         </div>
         <div className=" lg:flex">
-          <div className="hidden lg:flex">
+          <div className={`hidden lg:flex ${isMenuOpen ? "" : "hidden"}`}>
             <ul
               className={`${styles.menuHorizontal} ${styles.menu}  flex-nowrap`}
             >
@@ -226,7 +226,6 @@ const Navbar = () => {
                   </ul>
                 </details>
               </li>
-
               <li>
                 <details>
                   <summary className="text-[20px] ">Características</summary>
@@ -273,6 +272,7 @@ const Navbar = () => {
             </ul>
           </div>
         </div>
+
       </div>
     </div>
   );

@@ -88,7 +88,7 @@
     ):not(.active, .btn):hover {
     cursor: pointer;
   }
-  @supports (color: oklch(#b3794f)) {
+  @supports (color: oklch(0 0 0)) {
     :where(
         .menu li:not(.menu-title, .disabled) > *:not(ul, details, .menu-title)
       ):not(.active, .btn):hover,
@@ -113,7 +113,7 @@
     ):not(.active, .btn):hover {
     cursor: pointer;
   }
-  @supports (color: oklch(#b3794f)) {
+  @supports (color: oklch()) {
     :where(
         .menu li:not(.menu-title, .disabled) > *:not(ul, details, .menu-title)
       ):not(.active, .btn):hover,
