@@ -4,7 +4,7 @@ export default function Contactenos() {
   return (
     <div>
       {" "}
-      <h1>Contactenos</h1>
+      <h1 className="justify-center flex items-center">Contactenos</h1>
     </div>
   );
 }
