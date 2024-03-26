@@ -13,6 +13,7 @@ export default authMiddleware({
     "/quienesSomos",
     "/dashboard",
     "/discipulado",
+    "/api/webhooks/clerk",
   ],
 });
 
