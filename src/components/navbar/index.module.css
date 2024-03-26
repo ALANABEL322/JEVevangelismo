@@ -1,6 +1,7 @@
 .menuHorizontal {
   display: inline-flex;
   flex-direction: row;
+  justify-content: flex-end;
 }
 
 .menuHorizontal > li:not(.menu-title) > details > ul {
