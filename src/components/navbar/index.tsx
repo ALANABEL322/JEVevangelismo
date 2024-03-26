@@ -1,57 +1,74 @@
-"use client";
 import Link from "next/link";
 import { Montserrat } from "next/font/google";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 import styles from "./index.module.css";
-import React, { useState, useEffect } from "react";
-import router from "next/router";
-import { useRouter } from "next/router";
+import React from "react";
+// import router from "next/router";
+// import { useRouter } from "next/router";
+import Header from "../header";
+import { UserButton, auth } from "@clerk/nextjs";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
-const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathname = usePathname();
-  
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 0);
-    };
+export default async function Navbar() {
+  const { userId } = auth();
+  // const [isScrolled, setIsScrolled] = useState(false);
+  // const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const pathname = usePathname();
 
-    window.addEventListener("scroll", handleScroll);
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollTop = window.scrollY;
+  //     setIsScrolled(scrollTop > 0);
+  //   };
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  //   window.addEventListener("scroll", handleScroll);
 
-  useEffect(() => {
-    setIsMenuOpen(false); 
-  }, [pathname]);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    if (!isMenuOpen) {
-    }
-  }, [isMenuOpen]);
+  // useEffect(() => {
+  //   setIsMenuOpen(false); // Cerrar el menú al cambiar de ruta
+  // }, [pathname]);
 
-  const isRootRoute = pathname === "/";
+  // useEffect(() => {
+  //   if (!isMenuOpen) {
+  //   }
+  // }, [isMenuOpen]);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  // const isRootRoute = pathname === "/";
 
+  // const toggleMenu = () => {
+  //   setIsMenuOpen(!isMenuOpen);
+  // };
 
+  // useEffect(() => {
+  //   // Cerrar el menú al cambiar de ruta
+  //   const handleRouteChange = () => {
+  //     setIsMenuOpen(false);
+  //   };
+
+  //   router.events.on("routeChangeComplete", handleRouteChange);
+
+  //   return () => {
+  //     router.events.off("routeChangeComplete", handleRouteChange);
+  //   };
+  // }, [pathname]);
+
+  // useEffect(() => {
+  //   if (isMenuOpen) {
+  //     setIsMenuOpen(false);
+  //   }
+  // }, [isMenuOpen, pathname]);
 
   return (
     <div className={`${montserrat.className} antialised items-start text-5xl`}>
       <div
-        className={`${
-          styles.navbar
-        } font-semibold text-white fixed w-full inset-x-0 top-0 flex justify-between  z-50 ${
-          isScrolled ? "bg-slate-600" : ""
-        } ${isScrolled && "opacity-50"}`}
-        style={{ backgroundColor: isRootRoute ? "" : "" }}
+        className={`${styles.navbar} font-semibold text-white fixed w-full inset-x-0 top-0 flex justify-between  z-50`}
+        // ${isScrolled ? "bg-slate-600" : ""
+        // } ${isScrolled && "opacity-50"}`}
+        // style={{ backgroundColor: isRootRoute ? "" : "" }}
       >
         <div className="navbar-start flex ">
           <div className="dropdown">
@@ -59,7 +76,7 @@ const Navbar = () => {
               tabIndex={0}
               role="button"
               className="btn btn-ghost lg:hidden"
-              onClick={toggleMenu}
+              // onClick={toggleMenu}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -79,124 +96,119 @@ const Navbar = () => {
             <Link href="/" className="btn btn-ghost text-2xl font-bold">
               Logo
             </Link>
-            {isMenuOpen && (
-              <ul
-                tabIndex={0}
-                className={`${styles.menu} w-screen menu menu-sm dropdown-content mt-3 z-[1] p-2 `}
-                style={{ backgroundColor: "#fff", zIndex: 0 }}
-              >
-                <div className="collapse collapse-arrow border text-black hover:text-[#b3794f] ">
-                  <div className="collapse collapse-arrow">
-                    <input type="checkbox" />
-                    <div className="collapse-title text-xl font-medium ">
-                      Nosotros
-                    </div>
-                    <div className="collapse-content">
-                      <ul className="p-2">
-                        <li className="">
-                          <Link
-                            href="/contactenos"
-                            className="text-[18px]  mb-3 text-black"
-                          >
-                            Contáctenos
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="/quienesSomos"
-                            className="text-[18px]  text-black"
-                          >
-                            Quienes Somos
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
+            {/* {isMenuOpen && ( */}
+            <ul
+              tabIndex={0}
+              className={`${styles.menu} w-screen menu menu-sm dropdown-content mt-3 z-[1] p-2 `}
+              style={{ backgroundColor: "#fff", zIndex: 0 }}
+            >
+              <div className="collapse collapse-arrow border text-black hover:text-[#b3794f] ">
+                <div className="collapse collapse-arrow">
+                  <input type="checkbox" />
+                  <div className="collapse-title text-xl font-medium ">
+                    Nosotros
                   </div>
-                  <div className="collapse-content"></div>
-                </div>
-
-                <div className="collapse collapse-arrow border border-base-300 mt-3  text-black hover:text-[#b3794f]">
-                  <div className="collapse collapse-arrow">
-                    <input type="checkbox" />
-                    <div className="collapse-title text-xl font-medium ">
-                      Equípanos
-                    </div>
-
-                    <div className="collapse-content">
-                      <ul className="p-2">
-                        <li>
-                          <Link
-                            href="/articulos"
-                            className="text-[18px]  mt-3 text-black"
-                          >
-                            Articulos
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="/doctrina"
-                            className="text-[18px]  my-3 text-black"
-                          >
-                            Doctrina
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="/herramientas"
-                            className="text-[18px]  text-black"
-                          >
-                            Herramientas
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="/peliculas"
-                            className="text-[18px]  my-3 text-black"
-                          >
-                            Peliculas
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            href="/videosVisuales"
-                            className="text-black text-[18px] "
-                          >
-                            Videos
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
+                  <div className="collapse-content">
+                    <ul className="p-2">
+                      <li className="">
+                        <Link
+                          href="/contactenos"
+                          className="text-[18px]  mb-3 text-black"
+                        >
+                          Contáctenos
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/quienesSomos"
+                          className="text-[18px]  text-black"
+                        >
+                          Quienes Somos
+                        </Link>
+                      </li>
+                    </ul>
                   </div>
                 </div>
-                <li className="text-black font-medium mt-8">
-                  <Link href="/devocionales" className="text-[20px] text-black">
-                    Devocionales
-                  </Link>
+                <div className="collapse-content"></div>
+              </div>
+
+              <div className="collapse collapse-arrow border border-base-300 mt-3  text-black hover:text-[#b3794f]">
+                <div className="collapse collapse-arrow">
+                  <input type="checkbox" />
+                  <div className="collapse-title text-xl font-medium ">
+                    Equípanos
+                  </div>
+
+                  <div className="collapse-content">
+                    <ul className="p-2">
+                      <li>
+                        <Link
+                          href="/articulos"
+                          className="text-[18px]  mt-3 text-black"
+                        >
+                          Articulos
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/doctrina"
+                          className="text-[18px]  my-3 text-black"
+                        >
+                          Doctrina
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/herramientas"
+                          className="text-[18px]  text-black"
+                        >
+                          Herramientas
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/peliculas"
+                          className="text-[18px]  my-3 text-black"
+                        >
+                          Peliculas
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/videosVisuales"
+                          className="text-black text-[18px] "
+                        >
+                          Videos
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <li className="text-black font-medium mt-8">
+                <Link href="/devocionales" className="text-[20px] text-black">
+                  Devocionales
+                </Link>
+              </li>
+              <li className="text-black font-medium text-2xl ">
+                <Link
+                  href="/discipulado"
+                  className="text-[20px] text-black my-10"
+                >
+                  Discipulado
+                </Link>
+              </li>
+              <button className="items-start text-black font-medium">
+                <li className="items-start">
+                  <Header />
                 </li>
-                <li className="text-black font-medium text-2xl ">
-                  <Link
-                    href="/discipulado"
-                    className="text-[20px] text-black my-10"
-                  >
-                    Discipulado
-                  </Link>
-                </li>
-                <button className="items-start text-black font-medium">
-                  <li className="items-start">
-                    <Link
-                      href="/login"
-                      className="text-[20px] mb-6 items-start"
-                    >
-                      login
-                    </Link>
-                  </li>
-                </button>
-              </ul>
-            )}
+              </button>
+            </ul>
+            {/* )} */}
           </div>
         </div>
         <div className=" lg:flex">
-          <div className={`hidden lg:flex ${isMenuOpen ? "" : "hidden"}`}>
+          <div className="lg:flex  hidden">
             <ul
               className={`${styles.menuHorizontal} ${styles.menu}  flex-nowrap`}
             >
@@ -256,26 +268,34 @@ const Navbar = () => {
                 </details>
               </li>
               <li>
-                <Link href="/devocionales" className="text-[20px]">
+                <Link href="/devocionales" className="text-[20px] mr-2">
                   Devocionales
                 </Link>
               </li>
               <li>
-                <Link href="/discipulado" className="text-[20px]">
+                <Link href="/discipulado" className="text-[20px] mr-5">
                   Discipulado
                 </Link>
               </li>
 
-              <li className="text-[20px] ">
-                <Link href="/login">login</Link>
-              </li>
+              <div>
+                {userId ? (
+                  <div className="flex gap-10 w-48 items-center text-[20px] flex-row flex-nowrap text-center mt-[2px] ">
+                    <Link href="/dashboard">tu cuenta</Link>
+
+                    <UserButton afterSignOutUrl="/"/>
+                  </div>
+                ) : (
+                  <div className="flex gap-4 items-center text-[20px]">
+                    <Link href="/sign-up">crear cuenta</Link>
+                    <Link href="/sign-in">registrarse</Link>
+                  </div>
+                )}
+              </div>
             </ul>
           </div>
         </div>
-
       </div>
     </div>
   );
-};
-
-export default Navbar;
+}
