@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { Montserrat } from "next/font/google";
-// import { usePathname } from "next/navigation";
 import styles from "./index.module.css";
 import React from "react";
-// import router from "next/router";
-// import { useRouter } from "next/router";
 import Header from "../header";
 import { UserButton, auth } from "@clerk/nextjs";
+// import { usePathname } from "next/navigation";
+// import router from "next/router";
+// import { useRouter } from "next/router";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 export default async function Navbar() {
@@ -277,16 +277,14 @@ export default async function Navbar() {
                   Discipulado
                 </Link>
               </li>
-
               <div>
                 {userId ? (
                   <div className="flex gap-10 w-48 items-center text-[20px] flex-row flex-nowrap text-center mt-[2px] ">
                     <Link href="/dashboard">tu cuenta</Link>
-
-                    <UserButton afterSignOutUrl="/"/>
+                    <UserButton afterSignOutUrl="/" />
                   </div>
                 ) : (
-                  <div className="flex gap-4 items-center text-[20px]">
+                  <div className="flex gap-9 items-center text-[20px] md:mt-2 flex-row flex-nowrap">
                     <Link href="/sign-up">crear cuenta</Link>
                     <Link href="/sign-in">registrarse</Link>
                   </div>
