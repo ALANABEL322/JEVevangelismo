@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Registro() {
+export default function Dashboard() {
   return (
     <div>
-      <h1>Registro</h1>
+      <h1>Dashboard</h1>
     </div>
   );
 }
