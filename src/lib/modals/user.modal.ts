@@ -1,7 +1,7 @@
 import { Schema, model, models } from "mongoose";
 
 const UserSchema = new Schema({
-  clerkId: {
+  userId: {
     type: String,
     required: true,
     unique: true,
@@ -15,7 +15,7 @@ const UserSchema = new Schema({
     type: String,
     unique: true,
   },
-  photo: {
+  imageUrl: {
     type: String,
     required: true,
   },
