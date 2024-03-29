@@ -11,10 +11,10 @@ export default authMiddleware({
     "/videosVisuales",
     "/contactenos",
     "/quienesSomos",
-    "/dashboard",
     "/discipulado",
     "/api/webhooks/clerk",
   ],
+  
 });
 
 export const config = {
