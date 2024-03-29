@@ -18,6 +18,7 @@ export const Navbar = () => {
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -52,12 +53,26 @@ export const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  //version desktop menu
+
+  const toggleMenuDesktop = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const closeMenuDesktop = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className={`${montserrat.className} antialised items-start text-5xl`}>
       <div
         className={`${
           styles.navbar
-        } font-semibold text-white fixed w-full inset-x-0 top-0 flex justify-between  z-50
+        } font-semibold text-white w-full inset-x-0 top-0 flex justify-between  z-50
         ${isScrolled ? "bg-slate-600" : ""} ${isScrolled && "opacity-50"}`}
         style={{ backgroundColor: isRootRoute ? "" : "" }}
       >
@@ -85,7 +100,14 @@ export const Navbar = () => {
               </svg>
             </div>
             <Link href="/" className="btn btn-ghost text-2xl font-bold">
-              Logo
+              <Image
+                src={
+                  "https://res.cloudinary.com/dn5ltihzv/image/upload/v1711653470/imagenes/Logo%20JEV.png"
+                }
+                width={80}
+                height={50}
+                alt="image-logo"
+              />
             </Link>
             {isMenuOpen && (
               <ul
@@ -103,6 +125,7 @@ export const Navbar = () => {
                       <ul className="p-2">
                         <li className="">
                           <Link
+                            onClick={closeMenu}
                             href="/contactenos"
                             className="text-[18px]  mb-3 text-black"
                           >
@@ -111,6 +134,7 @@ export const Navbar = () => {
                         </li>
                         <li>
                           <Link
+                            onClick={closeMenu}
                             href="/quienesSomos"
                             className="text-[18px]  text-black"
                           >
@@ -127,13 +151,14 @@ export const Navbar = () => {
                   <div className="collapse collapse-arrow">
                     <input type="checkbox" />
                     <div className="collapse-title text-xl font-medium ">
-                      Equípanos
+                      Equípate
                     </div>
 
                     <div className="collapse-content">
                       <ul className="p-2">
                         <li>
                           <Link
+                            onClick={closeMenu}
                             href="/articulos"
                             className="text-[18px]  mt-3 text-black"
                           >
@@ -142,6 +167,7 @@ export const Navbar = () => {
                         </li>
                         <li>
                           <Link
+                            onClick={closeMenu}
                             href="/doctrina"
                             className="text-[18px]  my-3 text-black"
                           >
@@ -150,6 +176,7 @@ export const Navbar = () => {
                         </li>
                         <li>
                           <Link
+                            onClick={closeMenu}
                             href="/herramientas"
                             className="text-[18px]  text-black"
                           >
@@ -158,6 +185,7 @@ export const Navbar = () => {
                         </li>
                         <li>
                           <Link
+                            onClick={closeMenu}
                             href="/peliculas"
                             className="text-[18px]  my-3 text-black"
                           >
@@ -166,6 +194,7 @@ export const Navbar = () => {
                         </li>
                         <li>
                           <Link
+                            onClick={closeMenu}
                             href="/videosVisuales"
                             className="text-black text-[18px] "
                           >
@@ -177,7 +206,11 @@ export const Navbar = () => {
                   </div>
                 </div>
                 <li className="text-black font-medium mt-8">
-                  <Link href="/devocionales" className="text-[20px] text-black">
+                  <Link
+                    href="/devocionales"
+                    className="text-[20px] text-black"
+                    onClick={closeMenu}
+                  >
                     Devocionales
                   </Link>
                 </li>
@@ -185,6 +218,7 @@ export const Navbar = () => {
                   <Link
                     href="/discipulado"
                     className="text-[20px] text-black my-10"
+                    onClick={closeMenu}
                   >
                     Discipulado
                   </Link>
@@ -194,7 +228,7 @@ export const Navbar = () => {
                     <UserButton afterSignOutUrl="/" />
                   </div>
                 ) : (
-                  <Link href="/iniciar-sesion">
+                  <Link href="/iniciar-sesion" onClick={closeMenu}>
                     <Image
                       alt="Tailwind CSS Navbar component"
                       src="https://res.cloudinary.com/dn5ltihzv/image/upload/v1711566804/imagenes/iniciar%20sesion%20log.svg"
@@ -208,66 +242,81 @@ export const Navbar = () => {
             )}
           </div>
         </div>
+        {/**version desktop */}
         <div className=" lg:flex">
           <div className="hidden lg:flex">
             <ul
               className={`${styles.menuHorizontal} ${styles.menu}  flex-nowrap`}
             >
-              <li>
-                <details>
-                  <summary className="text-[20px]  ">Nosotros</summary>
-                  <ul
-                    className="px-2"
-                    style={{ backgroundColor: "#fff", zIndex: 0 }}
-                  >
-                    <li>
-                      <Link
-                        href="/contactenos"
-                        className="text-black text-[18px]"
-                      >
-                        Contáctenos
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/quienesSomos"
-                        className="text-black text-center  text-[18px]"
-                      >
-                        Quienes Somos
-                      </Link>
-                    </li>
-                  </ul>
-                </details>
-              </li>
-              <li>
-                <details>
-                  <summary className="text-[20px] ">Características</summary>
-                  <ul
-                    className="p-2"
-                    style={{
-                      backgroundColor: "#fff",
-                      zIndex: 0,
-                      marginLeft: "10px",
-                    }}
-                  >
-                    <li className="text-black text-center  text-[18px]">
-                      <Link href="/articulos">Articulos</Link>
-                    </li>
-                    <li className="text-black text-center  text-[18px]">
-                      <Link href="/doctrina">Doctrina</Link>
-                    </li>
-                    <li className="text-black text-center  text-[18px]">
-                      <Link href="/herramientas">Herramientas</Link>
-                    </li>
-                    <li className="text-black text-center  text-[18px]">
-                      <Link href="/peliculas">Peliculas</Link>
-                    </li>
-                    <li className="text-black text-center  text-[18px]">
-                      <Link href="/videosVisuales">Videos</Link>
-                    </li>
-                  </ul>
-                </details>
-              </li>
+              <div className=" dropdown dropdown-hover border text-white hover:text-[#b3794f] ">
+                <li
+                  tabIndex={0}
+                  role="button"
+                  className=" mr-10 mt-[8px] text-[20px] font-bold"
+                >
+                  Nosotros
+                </li>
+                <ul
+                  tabIndex={0}
+                  className=" dropdown-content z-[1] menu p-2 shadow bg-base-100  w-64 mt-7 flex justify-center"
+                  style={{
+                    backgroundColor: "#fff",
+                    zIndex: 0,
+                  }}
+                >
+                  <li className="">
+                    <Link
+                      onClick={closeMenu}
+                      href="/contactenos"
+                      className=" text-[18px] text-black my-4"
+                    >
+                      Contáctenos
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      onClick={closeMenu}
+                      href="/quienesSomos"
+                      className=" text-[18px] mb-4 text-black"
+                    >
+                      Quienes Somos
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div className="dropdown dropdown-hover">
+                <li
+                  tabIndex={0}
+                  role="button"
+                  className="text-[20px] mt-[8px] mr-6 text-white hover:text-[#b3794f]"
+                >
+                  Equípate
+                </li>
+                <ul
+                  tabIndex={0}
+                  className={`${styles.menu} flex menu mt-7 dropdown-content z-[1]  shadow bg-slate-300 w-64`}
+                  style={{
+                    backgroundColor: "#fff",
+                    zIndex: 0,
+                  }}
+                >
+                  <li className="text-black text-center  text-[18px] p-3">
+                    <Link href="/articulos">Articulos</Link>
+                  </li>
+                  <li className="text-black text-center  text-[18px] p-3">
+                    <Link href="/doctrina">Doctrina</Link>
+                  </li>
+                  <li className="text-black text-center  text-[18px] p-3">
+                    <Link href="/herramientas">Herramientas</Link>
+                  </li>
+                  <li className="text-black text-center  text-[18px] p-3">
+                    <Link href="/peliculas">Peliculas</Link>
+                  </li>
+                  <li className="text-black text-center  text-[18px] p-3">
+                    <Link href="/videosVisuales">Videos</Link>
+                  </li>
+                </ul>
+              </div>
               <li>
                 <Link href="/devocionales" className="text-[20px] mr-2">
                   Devocionales
