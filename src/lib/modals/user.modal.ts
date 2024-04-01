@@ -1,7 +1,7 @@
 import { Schema, model, models } from "mongoose";
 
 const UserSchema = new Schema({
-  userId: {
+  clerkId: {
     type: String,
     required: true,
     unique: true,
@@ -15,7 +15,7 @@ const UserSchema = new Schema({
     type: String,
     unique: true,
   },
-  imageUrl: {
+  photo: {
     type: String,
     required: true,
   },
@@ -28,4 +28,5 @@ const UserSchema = new Schema({
 });
 
 const User = models?.User || model("User", UserSchema);
+
 export default User;
