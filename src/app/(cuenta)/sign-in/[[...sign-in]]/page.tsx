@@ -1,11 +1,12 @@
 import { SignIn } from "@clerk/nextjs";
 
-export default function iniciarSesion() {
+export default function Page() {
   return (
-    <div className="flex items-center justify-center flex-col gap-10}">
-      <h1 className="text-4xl font-bold my-20">Iniciar Sesión</h1>
-
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <SignIn />
+      <div className="text-sm mt-2 flex">
+
+      </div>
     </div>
   );
 }

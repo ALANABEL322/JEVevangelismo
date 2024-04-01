@@ -7,6 +7,16 @@ import { UserButton } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "../ui/navigation-menu";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -18,7 +28,6 @@ export const Navbar = () => {
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -57,22 +66,43 @@ export const Navbar = () => {
     setIsMenuOpen(false);
   };
 
-  //version desktop menu
-
-  const toggleMenuDesktop = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const closeMenuDesktop = () => {
-    setIsOpen(false);
-  };
+  const components: { title: string; href: string; description: string }[] = [
+    {
+      title: "Articulos",
+      href: "/articulos",
+      description:
+        "interes cristiano contenido relacionado a devocionales, doctrina y musica.",
+    },
+    {
+      title: "Doctrina",
+      href: "/doctrina",
+      description:
+        "enseñanzas doctrinales fundamentales para el caminar cristiano.",
+    },
+    {
+      title: "Herramientas",
+      href: "/herramientas",
+      description:
+        "contenido variado para tener opciones y recomendaciones en cuanto a la fé.",
+    },
+    {
+      title: "Peliculas",
+      href: "/peliculas",
+      description: "toda clase de peliculas cristianas.",
+    },
+    {
+      title: "Videos",
+      href: "/videosVisuales",
+      description: "Videos evangelisticos en la práctica y teoría.",
+    },
+  ];
 
   return (
     <div className={`${montserrat.className} antialised items-start text-5xl`}>
       <div
         className={`${
           styles.navbar
-        } font-semibold text-white w-full inset-x-0 top-0 flex justify-between  z-50
+        } font-semibold text-white fixed w-full inset-x-0 top-0 flex justify-between  z-50
         ${isScrolled ? "bg-slate-600" : ""} ${isScrolled && "opacity-50"}`}
         style={{ backgroundColor: isRootRoute ? "" : "" }}
       >
@@ -100,14 +130,7 @@ export const Navbar = () => {
               </svg>
             </div>
             <Link href="/" className="btn btn-ghost text-2xl font-bold">
-              <Image
-                src={
-                  "https://res.cloudinary.com/dn5ltihzv/image/upload/v1711653470/imagenes/Logo%20JEV.png"
-                }
-                width={80}
-                height={50}
-                alt="image-logo"
-              />
+              Logo
             </Link>
             {isMenuOpen && (
               <ul
@@ -151,7 +174,7 @@ export const Navbar = () => {
                   <div className="collapse collapse-arrow">
                     <input type="checkbox" />
                     <div className="collapse-title text-xl font-medium ">
-                      Equípate
+                      Equípanos
                     </div>
 
                     <div className="collapse-content">
@@ -242,83 +265,63 @@ export const Navbar = () => {
             )}
           </div>
         </div>
-        {/**version desktop */}
         <div className=" lg:flex">
           <div className="hidden lg:flex">
-            <ul
-              className={`${styles.menuHorizontal} ${styles.menu}  flex-nowrap`}
-            >
-              <div className=" dropdown dropdown-hover border text-white hover:text-[#b3794f] ">
-                <li
-                  tabIndex={0}
-                  role="button"
-                  className=" mr-10 mt-[8px] text-[20px] font-bold"
-                >
-                  Nosotros
-                </li>
-                <ul
-                  tabIndex={0}
-                  className=" dropdown-content z-[1] menu p-2 shadow bg-base-100  w-64 mt-7 flex justify-center"
-                  style={{
-                    backgroundColor: "#fff",
-                    zIndex: 0,
-                  }}
-                >
-                  <li className="">
-                    <Link
-                      onClick={closeMenu}
-                      href="/contactenos"
-                      className=" text-[18px] text-black my-4"
-                    >
-                      Contáctenos
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      onClick={closeMenu}
-                      href="/quienesSomos"
-                      className=" text-[18px] mb-4 text-black"
-                    >
-                      Quienes Somos
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div className="dropdown dropdown-hover">
-                <li
-                  tabIndex={0}
-                  role="button"
-                  className="text-[20px] mt-[8px] mr-6 text-white hover:text-[#b3794f]"
-                >
-                  Equípate
-                </li>
-                <ul
-                  tabIndex={0}
-                  className={`${styles.menu} flex menu mt-7 dropdown-content z-[1]  shadow bg-slate-300 w-64`}
-                  style={{
-                    backgroundColor: "#fff",
-                    zIndex: 0,
-                  }}
-                >
-                  <li className="text-black text-center  text-[18px] p-3">
-                    <Link href="/articulos">Articulos</Link>
-                  </li>
-                  <li className="text-black text-center  text-[18px] p-3">
-                    <Link href="/doctrina">Doctrina</Link>
-                  </li>
-                  <li className="text-black text-center  text-[18px] p-3">
-                    <Link href="/herramientas">Herramientas</Link>
-                  </li>
-                  <li className="text-black text-center  text-[18px] p-3">
-                    <Link href="/peliculas">Peliculas</Link>
-                  </li>
-                  <li className="text-black text-center  text-[18px] p-3">
-                    <Link href="/videosVisuales">Videos</Link>
-                  </li>
-                </ul>
-              </div>
+            <ul className={`${styles.menuHorizontal} flex-nowrap`}>
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="mb-3 text-black text-[20px] ">
+                      Equípate
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                        {components.map((component) => (
+                          <ListItem
+                            key={component.title}
+                            title={component.title}
+                            href={component.href}
+                            className="text-[20px]"
+                          >
+                            {component.description}
+                          </ListItem>
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="text-black text-[20px] mx-4 mb-3">
+                      Nosotros
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                        <ListItem href="/contactenos" title="Contáctenos">
+                         cualquier consulta o duda puede contactarnos sin ningún problema.
+                        </ListItem>
+                        <ListItem
+                          href="/quienesSomos"
+                          title="Quiénes somos"
+                        >
+                          aquí veras nuestro objetivo nuestras metas y motivación 
+                        </ListItem>
+                        {/* <ListItem
+                          href="/docs/primitives/typography"
+                          title="Typography"
+                        >
+                          Styles for headings, paragraphs, lists...etc
+                        </ListItem> */}
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
               <li>
-                <Link href="/devocionales" className="text-[20px] mr-2">
+                <Link href="/devocionales" className="text-[20px] mr-5">
                   Devocionales
                 </Link>
               </li>
@@ -338,7 +341,7 @@ export const Navbar = () => {
                     src="https://res.cloudinary.com/dn5ltihzv/image/upload/v1711566804/imagenes/iniciar%20sesion%20log.svg"
                     width={40}
                     height={30}
-                    className="border-2 rounded-full"
+                    className="border-2 rounded-full mt-3"
                   />
                 </Link>
               )}
@@ -349,3 +352,28 @@ export const Navbar = () => {
     </div>
   );
 };
+const ListItem = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
+>(({ className, title, children, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            className
+          )}
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  );
+});
+ListItem.displayName = "ListItem";
