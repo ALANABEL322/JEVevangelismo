@@ -17,7 +17,14 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
-
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../ui/accordion";
+import { Separator } from "../ui/separator";
+import { motion } from "framer-motion";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const Navbar = () => {
@@ -106,172 +113,174 @@ export const Navbar = () => {
         ${isScrolled ? "bg-slate-600" : ""} ${isScrolled && "opacity-50"}`}
         style={{ backgroundColor: isRootRoute ? "" : "" }}
       >
-        <div className="navbar-start flex ">
-          <div className="dropdown">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost lg:hidden"
-              onClick={toggleMenu}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
+        <Link
+          href="/"
+          className={`${styles.logoJEV} hidden lg:block btn-ghost text-2xl font-bold justify-end flex-row-reverse`}
+        >
+          Logo
+        </Link>
+        <div className="lg:hidden mt-2">
+          <div className="">
+            <div className="flex justify-between items-center ml-3 h-1/2 mb-10">
+              <div>
+                <div className={`${styles.menuHamburguesa}`}>
+                  <input
+                    type="checkbox"
+                    id="btnmenu"
+                    className={`${styles.btnmenu}`}
+                    onClick={toggleMenu}
+                  />
+                  <label htmlFor="btnmenu" className={`${styles.lblmenu}`}>
+                    <span className={`${styles.spn1}`}></span>
+                    <span className={`${styles.spn2}`}></span>
+                    <span className={`${styles.spn3}`}></span>
+                  </label>
+                </div>
+              </div>
+              <div className="absolute ml-10 flex justify-center ">
+                <Link
+                  href="/"
+                  className={`${styles.logoJEV} btn-ghost text-2xl font-bold ml-10 relative`}
+                >
+                  Logo
+                </Link>
+              </div>
             </div>
-            <Link href="/" className="btn btn-ghost text-2xl font-bold">
-              Logo
-            </Link>
             {isMenuOpen && (
               <ul
-                tabIndex={0}
-                className={`${styles.menu} w-screen menu menu-sm dropdown-content mt-3 z-[1] p-2 `}
-                style={{ backgroundColor: "#fff", zIndex: 0 }}
+                className={`${styles.menuVertical} backdrop-opacity-10 backdrop-invert bg-white/10 min-h-full `}
               >
-                <div className="collapse collapse-arrow border text-black hover:text-[#b3794f] ">
-                  <div className="collapse collapse-arrow">
-                    <input type="checkbox" />
-                    <div className="collapse-title text-xl font-medium ">
+                <Accordion type="single" collapsible className="w-full">
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger className="text-2xl mt-10">
+                      Equípate
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <NavigationMenu>
+                        <NavigationMenuList>
+                          <NavigationMenuItem className="flex-col flex w-full h-full">
+                            <Link href="/articulos" legacyBehavior passHref>
+                              <NavigationMenuLink
+                                className={navigationMenuTriggerStyle()}
+                              >
+                                <div className="text-[18px]">Articulos</div>
+                              </NavigationMenuLink>
+                            </Link>
+                            <Link href="/doctrina" legacyBehavior passHref>
+                              <NavigationMenuLink
+                                className={navigationMenuTriggerStyle()}
+                              >
+                                <div className="text-[18px]">Doctrina</div>
+                              </NavigationMenuLink>
+                            </Link>
+                            <Link href="/herramientas" legacyBehavior passHref>
+                              <NavigationMenuLink
+                                className={navigationMenuTriggerStyle()}
+                              >
+                                <div className="text-[18px]">Herramientas</div>
+                              </NavigationMenuLink>
+                            </Link>
+                            <Link href="/peliculas" legacyBehavior passHref>
+                              <NavigationMenuLink
+                                className={navigationMenuTriggerStyle()}
+                              >
+                                <div className="text-[18px]">Peliculas</div>
+                              </NavigationMenuLink>
+                            </Link>
+                            <Link href="/videoVisuales" legacyBehavior passHref>
+                              <NavigationMenuLink
+                                className={navigationMenuTriggerStyle()}
+                              >
+                                <div className="text-[18px]">Videos</div>
+                              </NavigationMenuLink>
+                            </Link>
+                          </NavigationMenuItem>
+                        </NavigationMenuList>
+                      </NavigationMenu>
+                      <Separator className="my-3" />
+                    </AccordionContent>
+                  </AccordionItem>
+                  <AccordionItem value="item-2">
+                    <AccordionTrigger className="text-2xl mt-10">
                       Nosotros
-                    </div>
-                    <div className="collapse-content">
-                      <ul className="p-2">
-                        <li className="">
-                          <Link
-                            onClick={closeMenu}
-                            href="/contactenos"
-                            className="text-[18px]  mb-3 text-black"
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <NavigationMenu>
+                        <NavigationMenuList>
+                          <NavigationMenuItem className="flex-col flex w-full h-full">
+                            <Link href="/contactenos" legacyBehavior passHref>
+                              <NavigationMenuLink
+                                className={navigationMenuTriggerStyle()}
+                              >
+                                <div className="text-[18px]">Contáctenos</div>
+                              </NavigationMenuLink>
+                            </Link>
+                            <Link href="/quienesSomos" legacyBehavior passHref>
+                              <NavigationMenuLink
+                                className={navigationMenuTriggerStyle()}
+                              >
+                                <div className="text-[18px]">Quiénes Somos</div>
+                              </NavigationMenuLink>
+                            </Link>
+                          </NavigationMenuItem>
+                        </NavigationMenuList>
+                      </NavigationMenu>
+                      <Separator className="my-3" />
+                    </AccordionContent>
+                  </AccordionItem>
+                  <NavigationMenu className="flex-col flex">
+                    <NavigationMenuList className="mt-10">
+                      <NavigationMenuItem>
+                        <Link href="/devocionales" legacyBehavior passHref>
+                          <NavigationMenuLink
+                            className={navigationMenuTriggerStyle()}
                           >
-                            Contáctenos
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            onClick={closeMenu}
-                            href="/quienesSomos"
-                            className="text-[18px]  text-black"
-                          >
-                            Quienes Somos
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="collapse-content"></div>
-                </div>
+                            <span className="text-2xl ">Devocionales</span>
+                          </NavigationMenuLink>
+                        </Link>
+                      </NavigationMenuItem>
+                    </NavigationMenuList>
 
-                <div className="collapse collapse-arrow border border-base-300 mt-3  text-black hover:text-[#b3794f]">
-                  <div className="collapse collapse-arrow">
-                    <input type="checkbox" />
-                    <div className="collapse-title text-xl font-medium ">
-                      Equípanos
+                    <NavigationMenuList className="mt-10">
+                      <NavigationMenuItem>
+                        <Link href="/discipulado" legacyBehavior passHref>
+                          <NavigationMenuLink
+                            className={` ${navigationMenuTriggerStyle()}`}
+                          >
+                            <span className="text-2xl mr-4 ">Discipulado</span>
+                          </NavigationMenuLink>
+                        </Link>
+                      </NavigationMenuItem>
+                    </NavigationMenuList>
+                  </NavigationMenu>
+                  {user.isSignedIn ? (
+                    <div>
+                      <UserButton afterSignOutUrl="/" />
                     </div>
-
-                    <div className="collapse-content">
-                      <ul className="p-2">
-                        <li>
-                          <Link
-                            onClick={closeMenu}
-                            href="/articulos"
-                            className="text-[18px]  mt-3 text-black"
-                          >
-                            Articulos
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            onClick={closeMenu}
-                            href="/doctrina"
-                            className="text-[18px]  my-3 text-black"
-                          >
-                            Doctrina
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            onClick={closeMenu}
-                            href="/herramientas"
-                            className="text-[18px]  text-black"
-                          >
-                            Herramientas
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            onClick={closeMenu}
-                            href="/peliculas"
-                            className="text-[18px]  my-3 text-black"
-                          >
-                            Peliculas
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            onClick={closeMenu}
-                            href="/videosVisuales"
-                            className="text-black text-[18px] "
-                          >
-                            Videos
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <li className="text-black font-medium mt-8">
-                  <Link
-                    href="/devocionales"
-                    className="text-[20px] text-black"
-                    onClick={closeMenu}
-                  >
-                    Devocionales
-                  </Link>
-                </li>
-                <li className="text-black font-medium text-2xl ">
-                  <Link
-                    href="/discipulado"
-                    className="text-[20px] text-black my-10"
-                    onClick={closeMenu}
-                  >
-                    Discipulado
-                  </Link>
-                </li>
-                {user.isSignedIn ? (
-                  <div className="mb-3">
-                    <UserButton afterSignOutUrl="/" />
-                  </div>
-                ) : (
-                  <Link href="/iniciar-sesion" onClick={closeMenu}>
-                    <Image
-                      alt="Tailwind CSS Navbar component"
-                      src="https://res.cloudinary.com/dn5ltihzv/image/upload/v1711566804/imagenes/iniciar%20sesion%20log.svg"
-                      width={40}
-                      height={30}
-                      className="border-2 rounded-full mb-5 ml-3"
-                    />
-                  </Link>
-                )}
+                  ) : (
+                    <Link href="/sign-in">
+                      <Image
+                        alt="Tailwind CSS Navbar component"
+                        src="https://res.cloudinary.com/dn5ltihzv/image/upload/v1711566804/imagenes/iniciar%20sesion%20log.svg"
+                        width={40}
+                        height={30}
+                        className="border-2 rounded-full mt-20 ml-1 "
+                      />
+                    </Link>
+                  )}
+                </Accordion>
               </ul>
             )}
           </div>
         </div>
+        {/** pantallas grandes*/}
         <div className=" lg:flex">
           <div className="hidden lg:flex">
-            <ul className={`${styles.menuHorizontal} flex-nowrap`}>
+            <ul className={`${styles.menuHorizontal}`}>
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="mb-3 text-black text-[20px] ">
+                    <NavigationMenuTrigger className=" text-[18px] ">
                       Equípate
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
@@ -281,7 +290,6 @@ export const Navbar = () => {
                             key={component.title}
                             title={component.title}
                             href={component.href}
-                            className="text-[20px]"
                           >
                             {component.description}
                           </ListItem>
@@ -295,19 +303,18 @@ export const Navbar = () => {
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="text-black text-[20px] mx-4 mb-3">
+                    <NavigationMenuTrigger className="text-[18px]  ">
                       Nosotros
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                         <ListItem href="/contactenos" title="Contáctenos">
-                         cualquier consulta o duda puede contactarnos sin ningún problema.
+                          cualquier consulta o duda puede contactarnos sin
+                          ningún problema.
                         </ListItem>
-                        <ListItem
-                          href="/quienesSomos"
-                          title="Quiénes somos"
-                        >
-                          aquí veras nuestro objetivo nuestras metas y motivación 
+                        <ListItem href="/quienesSomos" title="Quiénes somos">
+                          aquí veras nuestro objetivo nuestras metas y
+                          motivación
                         </ListItem>
                         {/* <ListItem
                           href="/docs/primitives/typography"
@@ -320,28 +327,44 @@ export const Navbar = () => {
                   </NavigationMenuItem>
                 </NavigationMenuList>
               </NavigationMenu>
-              <li>
-                <Link href="/devocionales" className="text-[20px] mr-5">
-                  Devocionales
-                </Link>
-              </li>
-              <li>
-                <Link href="/discipulado" className="text-[20px] mr-5">
-                  Discipulado
-                </Link>
-              </li>
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <Link href="/devocionales" legacyBehavior passHref>
+                      <NavigationMenuLink
+                        className={navigationMenuTriggerStyle()}
+                      >
+                        <div className="text-[18px]">Devocionales</div>
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <Link href="/discipulado" legacyBehavior passHref>
+                      <NavigationMenuLink
+                        className={` ${navigationMenuTriggerStyle()}`}
+                      >
+                        <span className="text-[18px]">Discipulado</span>
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
               {user.isSignedIn ? (
                 <div>
                   <UserButton afterSignOutUrl="/" />
                 </div>
               ) : (
-                <Link href="/iniciar-sesion">
+                <Link href="/sign-in">
                   <Image
                     alt="Tailwind CSS Navbar component"
                     src="https://res.cloudinary.com/dn5ltihzv/image/upload/v1711566804/imagenes/iniciar%20sesion%20log.svg"
                     width={40}
                     height={30}
-                    className="border-2 rounded-full mt-3"
+                    className="border-2 rounded-full mt-3 ml-4"
                   />
                 </Link>
               )}
@@ -362,12 +385,12 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            " block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className
           )}
           {...props}
         >
-          <div className="text-sm font-medium leading-none">{title}</div>
+          <div className="text-base font-medium leading-none">{title}</div>
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
             {children}
           </p>
