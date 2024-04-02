@@ -31,8 +31,8 @@
   justify-content: flex-end; */
 }
 .menuVertical {
-  width: 400px;
-  min-height: 1000px;
+  width: 100%;
+  min-height: 600px;
   display: flex;
   background: #313131;
 }
