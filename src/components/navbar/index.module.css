@@ -22,201 +22,73 @@
   justify-content: flex-end;
 }
 
-.menuHorizontal > li:not(.menu-title) > details > ul {
-  margin-inline-start: 0px;
-  margin-top: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-inline-end: 0.5rem;
-}
-
-.menuHorizontal > li > details > ul:before {
-  content: none;
-}
-
 .navbar {
   display: flex;
   padding: var(--navbar-padding, 0.5rem);
   min-height: 4rem;
   width: 100%;
+  /* flex-direction: row-reverse;
+  justify-content: flex-end; */
 }
-
-:where(.navbar > *:not(script, style)) {
-  display: inline-flex;
-}
-
-@media (hover: hover) {
-  .menu li > *:not(ul, .menu-title, details, .btn):active,
-  .menu li > *:not(ul, .menu-title, details, .btn).active,
-  .menu li > details > summary:active {
-    --tw-bg-opacity: 1;
-
-    --tw-text-opacity: 1;
-    color: #b3794f;
-  }
-}
-@media (hover: hover) {
-  .menu li > *:not(ul, .menu-title, details, .btn):active,
-  .menu li > *:not(ul, .menu-title, details, .btn).active,
-  .menu li > details > summary:active {
-    --tw-bg-opacity: 1;
-    --tw-text-opacity: 1;
-    color: #b3794f;
-  }
-}
-@media (hover: hover) {
-  .menu li > *:not(ul, .menu-title, details, .btn):active,
-  .menu li > *:not(ul, .menu-title, details, .btn).active,
-  .menu li > details > summary:active {
-    --tw-bg-opacity: 1;
-    --tw-text-opacity: 1;
-    color: #b3794f;
-  }
-}
-@media (hover: hover) {
-  :where(
-      .menu li:not(.menu-title, .disabled) > *:not(ul, details, .menu-title)
-    ):not(.active, .btn):hover,
-  :where(
-      .menu li:not(.menu-title, .disabled) > details > summary:not(.menu-title)
-    ):not(.active, .btn):hover {
-    cursor: pointer;
-  }
-  @supports (color: #c0c0c0) {
-    :where(
-        .menu li:not(.menu-title, .disabled) > *:not(ul, details, .menu-title)
-      ):not(.active, .btn):hover,
-    :where(
-        .menu
-          li:not(.menu-title, .disabled)
-          > details
-          > summary:not(.menu-title)
-      ):not(.active, .btn):hover {
-      .menu li > *:hover {
-        color: #b3794f;
-      }
-    }
-  }
-}
-@media (hover: hover) {
-  :where(
-      .menu li:not(.menu-title, .disabled) > *:not(ul, details, .menu-title)
-    ):not(.active, .btn):hover,
-  :where(
-      .menu li:not(.menu-title, .disabled) > details > summary:not(.menu-title)
-    ):not(.active, .btn):hover {
-    cursor: pointer;
-  }
-  @supports (color: #c0c0c0) {
-    :where(
-        .menu li:not(.menu-title, .disabled) > *:not(ul, details, .menu-title)
-      ):not(.active, .btn):hover,
-    :where(
-        .menu
-          li:not(.menu-title, .disabled)
-          > details
-          > summary:not(.menu-title)
-      ):not(.active, .btn):hover {
-      .menu li > *:hover {
-        color: #b3794f;
-      }
-    }
-  }
-}
-@media (hover: hover) {
-  :where(
-      .menu li:not(.menu-title, .disabled) > *:not(ul, details, .menu-title)
-    ):not(.active, .btn):hover,
-  :where(
-      .menu li:not(.menu-title, .disabled) > details > summary:not(.menu-title)
-    ):not(.active, .btn):hover {
-    cursor: pointer;
-  }
-  @supports (color: #c0c0c0) {
-    :where(
-        .menu li:not(.menu-title, .disabled) > *:not(ul, details, .menu-title)
-      ):not(.active, .btn):hover,
-    :where(
-        .menu
-          li:not(.menu-title, .disabled)
-          > details
-          > summary:not(.menu-title)
-      ):not(.active, .btn):hover {
-      .menu li > *:hover {
-        color: #b3794f;
-      }
-    }
-  }
-}
-@media (hover: hover) {
-  :where(
-      .menu li:not(.menu-title, .disabled) > *:not(ul, details, .menu-title)
-    ):not(.active, .btn):hover,
-  :where(
-      .menu li:not(.menu-title, .disabled) > details > summary:not(.menu-title)
-    ):not(.active, .btn):hover {
-    cursor: pointer;
-  }
-  @supports (color: #c0c0c0) {
-    :where(
-        .menu li:not(.menu-title, .disabled) > *:not(ul, details, .menu-title)
-      ):not(.active, .btn):hover,
-    :where(
-        .menu
-          li:not(.menu-title, .disabled)
-          > details
-          > summary:not(.menu-title)
-      ):not(.active, .btn):hover {
-      .menu li > *:hover {
-        color: #b3794f;
-      }
-    }
-  }
-}
-
-.menu li > *:hover {
-  color: #b3794f;
-}
-.menu {
+.menuVertical {
+  width: 400px;
+  min-height: 1000px;
   display: flex;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  padding: 0.5rem;
+  background: #313131;
 }
-.menu :where(li ul) {
+
+
+
+.lblmenu {
+  width: 50px;
+  height: 30px;
   position: relative;
-  white-space: nowrap;
-  margin-inline-start: 1rem;
-  padding-inline-start: 0.5rem;
-}
-.menu :where(li:not(.menu-title) > *:not(ul, details, .menu-title, .btn)),
-.menu :where(li:not(.menu-title) > details > summary:not(.menu-title)) {
-  display: grid;
-  grid-auto-flow: column;
-  align-content: flex-start;
-  align-items: center;
-  gap: 0.5rem;
-  grid-auto-columns: minmax(auto, max-content) auto max-content;
-  user-select: none;
+  cursor: pointer;
 }
 
-.menu :where(li:not(.menu-title) > *:not(ul, details, .menu-title, .btn)),
-.menu :where(li:not(.menu-title) > details > summary:not(.menu-title)) {
-  border-radius: var(--rounded-btn, 0.5rem);
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  text-align: start;
-  transition-property: #b3794f, background-color, border-color,
-    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
-    backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  transition-duration: 200ms;
-  text-wrap: balance;
+.spn1,
+.spn2,
+.spn3 {
+  position: absolute;
+  content: "";
+  background: #fff;
+  width: 50px;
+  height: 5px;
+  border-radius: 5px;
+  transition: all 400ms ease;
 }
 
-.menu a:active {
-  color: #c0c0c0; 
+.spn2 {
+  top: 11px;
+}
+
+.spn3 {
+  top: 21px;
+}
+
+.btnmenu {
+  display: none;
+}
+
+/* Ajuste en las reglas CSS para el estado checked del botón */
+.btnmenu:checked ~ .lblmenu .spn1 {
+  transform: rotate(140deg);
+  top: 10px;
+}
+
+.btnmenu:checked ~ .lblmenu .spn2 {
+  opacity: 0;
+}
+
+.btnmenu:checked ~ .lblmenu .spn3 {
+  transform: rotate(-140deg);
+  top: 10px;
+}
+
+/* .logoJEV {
+  display: flex;
+} */
+
+.menuHamburguesa {
+  display: flex;
 }
