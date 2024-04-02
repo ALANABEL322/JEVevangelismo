@@ -147,13 +147,25 @@ export const Navbar = () => {
               </div>
             </div>
             {isMenuOpen && (
-              <ul
-                className={`${styles.menuVertical} backdrop-opacity-10 backdrop-invert bg-white/10 min-h-full `}
+              <motion.div
+                className={`${styles.menuVertical}`}
+                initial={{ opacity: 0, x: "-100%" }}
+                animate={{
+                  opacity: isMenuOpen ? 1 : 0,
+                  x: isMenuOpen ? "0%" : "-100%",
+                }}
+                transition={{ duration: 0.5 }}
               >
-                <Accordion type="single" collapsible className="w-full">
+                <Accordion type="single" collapsible className="w-screen">
                   <AccordionItem value="item-1">
                     <AccordionTrigger className="text-2xl mt-10">
-                      Equípate
+                      <motion.div
+                        initial={{ opacity: 0, x: "-20px" }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.6 }}
+                      >
+                        Equípate
+                      </motion.div>
                     </AccordionTrigger>
                     <AccordionContent>
                       <NavigationMenu>
@@ -202,7 +214,13 @@ export const Navbar = () => {
                   </AccordionItem>
                   <AccordionItem value="item-2">
                     <AccordionTrigger className="text-2xl mt-10">
-                      Nosotros
+                      <motion.div
+                        initial={{ opacity: 0, x: "-20px" }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.7 }}
+                      >
+                        Nosotros
+                      </motion.div>
                     </AccordionTrigger>
                     <AccordionContent>
                       <NavigationMenu>
@@ -235,7 +253,13 @@ export const Navbar = () => {
                           <NavigationMenuLink
                             className={navigationMenuTriggerStyle()}
                           >
-                            <span className="text-2xl ">Devocionales</span>
+                            <motion.div
+                              initial={{ opacity: 0, x: "-20px" }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.8 }}
+                            >
+                              <span className="text-2xl ">Devocionales</span>
+                            </motion.div>
                           </NavigationMenuLink>
                         </Link>
                       </NavigationMenuItem>
@@ -247,7 +271,15 @@ export const Navbar = () => {
                           <NavigationMenuLink
                             className={` ${navigationMenuTriggerStyle()}`}
                           >
-                            <span className="text-2xl mr-4 ">Discipulado</span>
+                            <motion.div
+                              initial={{ opacity: 0, x: "-20px" }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.9 }}
+                            >
+                              <span className="text-2xl mr-4 ">
+                                Discipulado
+                              </span>
+                            </motion.div>
                           </NavigationMenuLink>
                         </Link>
                       </NavigationMenuItem>
@@ -255,21 +287,33 @@ export const Navbar = () => {
                   </NavigationMenu>
                   {user.isSignedIn ? (
                     <div>
-                      <UserButton afterSignOutUrl="/" />
+                      <motion.div
+                        initial={{ opacity: 0, x: "-20px" }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 1.0 }}
+                      >
+                        <UserButton afterSignOutUrl="/" />
+                      </motion.div>
                     </div>
                   ) : (
                     <Link href="/sign-in">
-                      <Image
-                        alt="Tailwind CSS Navbar component"
-                        src="https://res.cloudinary.com/dn5ltihzv/image/upload/v1711566804/imagenes/iniciar%20sesion%20log.svg"
-                        width={40}
-                        height={30}
-                        className="border-2 rounded-full mt-20 ml-1 "
-                      />
+                      <motion.div
+                        initial={{ opacity: 0, x: "-20px" }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 1.0 }}
+                      >
+                        <Image
+                          alt="Tailwind CSS Navbar component"
+                          src="https://res.cloudinary.com/dn5ltihzv/image/upload/v1711566804/imagenes/iniciar%20sesion%20log.svg"
+                          width={40}
+                          height={30}
+                          className="border-2 rounded-full mt-20 ml-1 "
+                        />
+                      </motion.div>
                     </Link>
                   )}
                 </Accordion>
-              </ul>
+              </motion.div>
             )}
           </div>
         </div>
