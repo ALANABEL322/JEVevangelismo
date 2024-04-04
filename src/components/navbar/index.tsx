@@ -17,12 +17,6 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "../ui/accordion";
 import { Separator } from "../ui/separator";
 import { motion } from "framer-motion";
 const montserrat = Montserrat({ subsets: ["latin"] });
@@ -109,7 +103,7 @@ export const Navbar = () => {
       <div
         className={`${
           styles.navbar
-        } font-semibold text-white fixed w-full inset-x-0 top-0 flex justify-between  z-50
+        } font-semibold text-white fixed w-full inset-x-0 top-0  justify-between  z-50
         ${isScrolled ? "bg-slate-600" : ""} ${isScrolled && "opacity-50"}`}
         style={{ backgroundColor: isRootRoute ? "" : "" }}
       >
@@ -117,11 +111,18 @@ export const Navbar = () => {
           href="/"
           className={`${styles.logoJEV} hidden lg:block btn-ghost text-2xl font-bold justify-end flex-row-reverse`}
         >
-          Logo
+          <Image
+            src={
+              "https://res.cloudinary.com/dn5ltihzv/image/upload/v1711653470/imagenes/Logo%20JEV.png"
+            }
+            width={90}
+            height={100}
+            alt="logo"
+          />
         </Link>
         <div className="lg:hidden mt-2">
           <div className="">
-            <div className="flex justify-between items-center ml-3 h-1/2 mb-10">
+            <div className="flex justify-between items-center ml-3 h-1/2 mb-20">
               <div>
                 <div className={`${styles.menuHamburguesa}`}>
                   <input
@@ -142,178 +143,183 @@ export const Navbar = () => {
                   href="/"
                   className={`${styles.logoJEV} btn-ghost text-2xl font-bold ml-10 relative`}
                 >
-                  Logo
+                  <Image
+                    src={
+                      "https://res.cloudinary.com/dn5ltihzv/image/upload/v1711653470/imagenes/Logo%20JEV.png"
+                    }
+                    width={80}
+                    height={100}
+                    alt="logo"
+                    className="object-cover mt-2"
+                  />
                 </Link>
               </div>
             </div>
             {isMenuOpen && (
-              <motion.div
-                className={`${styles.menuVertical}`}
-                initial={{ opacity: 0, x: "-100%" }}
-                animate={{
-                  opacity: isMenuOpen ? 1 : 0,
-                  x: isMenuOpen ? "0%" : "-100%",
-                }}
-                transition={{ duration: 0.5 }}
-              >
-                <Accordion type="single" collapsible className="w-screen">
-                  <AccordionItem value="item-1">
-                    <AccordionTrigger className="text-2xl mt-10">
-                      <motion.div
-                        initial={{ opacity: 0, x: "-20px" }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.6 }}
-                      >
-                        Equípate
-                      </motion.div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <NavigationMenu>
-                        <NavigationMenuList>
-                          <NavigationMenuItem className="flex-col flex w-full h-full">
-                            <Link href="/articulos" legacyBehavior passHref>
-                              <NavigationMenuLink
-                                className={navigationMenuTriggerStyle()}
-                              >
-                                <div className="text-[18px]">Articulos</div>
-                              </NavigationMenuLink>
-                            </Link>
-                            <Link href="/doctrina" legacyBehavior passHref>
-                              <NavigationMenuLink
-                                className={navigationMenuTriggerStyle()}
-                              >
-                                <div className="text-[18px]">Doctrina</div>
-                              </NavigationMenuLink>
-                            </Link>
-                            <Link href="/herramientas" legacyBehavior passHref>
-                              <NavigationMenuLink
-                                className={navigationMenuTriggerStyle()}
-                              >
-                                <div className="text-[18px]">Herramientas</div>
-                              </NavigationMenuLink>
-                            </Link>
-                            <Link href="/peliculas" legacyBehavior passHref>
-                              <NavigationMenuLink
-                                className={navigationMenuTriggerStyle()}
-                              >
-                                <div className="text-[18px]">Peliculas</div>
-                              </NavigationMenuLink>
-                            </Link>
-                            <Link href="/videoVisuales" legacyBehavior passHref>
-                              <NavigationMenuLink
-                                className={navigationMenuTriggerStyle()}
-                              >
-                                <div className="text-[18px]">Videos</div>
-                              </NavigationMenuLink>
-                            </Link>
-                          </NavigationMenuItem>
-                        </NavigationMenuList>
-                      </NavigationMenu>
-                      <Separator className="my-3" />
-                    </AccordionContent>
-                  </AccordionItem>
-                  <AccordionItem value="item-2">
-                    <AccordionTrigger className="text-2xl mt-10">
-                      <motion.div
-                        initial={{ opacity: 0, x: "-20px" }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.7 }}
-                      >
-                        Nosotros
-                      </motion.div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <NavigationMenu>
-                        <NavigationMenuList>
-                          <NavigationMenuItem className="flex-col flex w-full h-full">
-                            <Link href="/contactenos" legacyBehavior passHref>
-                              <NavigationMenuLink
-                                className={navigationMenuTriggerStyle()}
-                              >
-                                <div className="text-[18px]">Contáctenos</div>
-                              </NavigationMenuLink>
-                            </Link>
-                            <Link href="/quienesSomos" legacyBehavior passHref>
-                              <NavigationMenuLink
-                                className={navigationMenuTriggerStyle()}
-                              >
-                                <div className="text-[18px]">Quiénes Somos</div>
-                              </NavigationMenuLink>
-                            </Link>
-                          </NavigationMenuItem>
-                        </NavigationMenuList>
-                      </NavigationMenu>
-                      <Separator className="my-3" />
-                    </AccordionContent>
-                  </AccordionItem>
-                  <NavigationMenu className="flex-col flex">
+              <div>
+                <motion.nav
+                  className={`${styles.menuVertical}`}
+                  initial={{ opacity: 0, x: "-100%" }}
+                  animate={{
+                    opacity: isMenuOpen ? 1 : 0,
+                    x: isMenuOpen ? "0%" : "-100%",
+                  }}
+                  transition={{ duration: 0.5 }}
+                  exit={{ opacity: 0, x: "-100%" }}
+                />
+                <NavigationMenu className="flex-col">
+                  <NavigationMenu className="flex z-50">
                     <NavigationMenuList className="mt-10">
                       <NavigationMenuItem>
-                        <Link href="/devocionales" legacyBehavior passHref>
-                          <NavigationMenuLink
-                            className={navigationMenuTriggerStyle()}
+                        <NavigationMenuTrigger className="text-[22px]">
+                          <motion.div
+                            initial={{ opacity: 0, x: "-20px" }}
+                            animate={{
+                              opacity: isMenuOpen ? 1 : 0,
+                              x: isMenuOpen ? 0 : "-20px",
+                            }}
+                            transition={{ delay: 0.6 }}
+                            exit={{ opacity: 0, x: "-20px" }}
                           >
-                            <motion.div
-                              initial={{ opacity: 0, x: "-20px" }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: 0.8 }}
-                            >
-                              <span className="text-2xl ">Devocionales</span>
-                            </motion.div>
-                          </NavigationMenuLink>
-                        </Link>
-                      </NavigationMenuItem>
-                    </NavigationMenuList>
-
-                    <NavigationMenuList className="mt-10">
-                      <NavigationMenuItem>
-                        <Link href="/discipulado" legacyBehavior passHref>
-                          <NavigationMenuLink
-                            className={` ${navigationMenuTriggerStyle()}`}
-                          >
-                            <motion.div
-                              initial={{ opacity: 0, x: "-20px" }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: 0.9 }}
-                            >
-                              <span className="text-2xl mr-4 ">
-                                Discipulado
-                              </span>
-                            </motion.div>
-                          </NavigationMenuLink>
-                        </Link>
+                            Equípate
+                          </motion.div>
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                          <ul className="grid w-[300px] gap-3 p-4 md:w-[400px] md:grid-cols-2 lg:w-[500px] z-40">
+                            {components.map((component) => (
+                              <ListItem
+                                key={component.title}
+                                title={component.title}
+                                href={component.href}
+                              >
+                                {component.description}
+                              </ListItem>
+                            ))}
+                          </ul>
+                        </NavigationMenuContent>
                       </NavigationMenuItem>
                     </NavigationMenuList>
                   </NavigationMenu>
+                  <NavigationMenu className="flex z-40">
+                    <NavigationMenuList className="mt-10">
+                      <NavigationMenuItem>
+                        <NavigationMenuTrigger className="text-[22px]">
+                          <motion.div
+                            initial={{ opacity: 0, x: "-20px" }}
+                            animate={{
+                              opacity: isMenuOpen ? 1 : 0,
+                              x: isMenuOpen ? 0 : "-20px",
+                            }}
+                            transition={{ delay: 0.7 }}
+                            exit={{ opacity: 0, x: "-20px" }} // Animación de salida
+                          >
+                            Nosotros
+                          </motion.div>
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                          <ul className="grid gap-3 p-4 w-64 lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                            <ListItem href="/contactenos" title="Contáctenos">
+                              Cualquier consulta o duda puede contactarnos sin
+                              ningún problema.
+                            </ListItem>
+
+                            <ListItem
+                              href="/quienesSomos"
+                              title="Quiénes somos"
+                            >
+                              Aquí verás nuestro objetivo, nuestras metas y
+                              motivación.
+                            </ListItem>
+                          </ul>
+                        </NavigationMenuContent>
+                      </NavigationMenuItem>
+                    </NavigationMenuList>
+                  </NavigationMenu>
+                  <NavigationMenuList className="mt-10">
+                    <NavigationMenuItem>
+                      <Link href="/devocionales" legacyBehavior passHref>
+                        <NavigationMenuLink
+                          className={navigationMenuTriggerStyle()}
+                        >
+                          <motion.div
+                            initial={{ opacity: 0, x: "-20px" }}
+                            animate={{
+                              opacity: isMenuOpen ? 1 : 0,
+                              x: isMenuOpen ? 0 : "-20px",
+                            }}
+                            transition={{ delay: 0.8 }}
+                            exit={{ opacity: 0, x: "-20px" }}
+                          >
+                            <span className="text-[20px] ">Devocionales</span>
+                            <Separator className="w-screen absolute mt-6" />
+                          </motion.div>
+                        </NavigationMenuLink>
+                      </Link>
+                    </NavigationMenuItem>
+                  </NavigationMenuList>
+
+                  <NavigationMenuList className="my-10 ">
+                    <NavigationMenuItem>
+                      <Link href="/discipulado" legacyBehavior passHref>
+                        <NavigationMenuLink
+                          className={navigationMenuTriggerStyle()}
+                        >
+                          <motion.div
+                            initial={{ opacity: 0, x: "-20px" }}
+                            animate={{
+                              opacity: isMenuOpen ? 1 : 0,
+                              x: isMenuOpen ? 0 : "-20px",
+                            }}
+                            transition={{ delay: 0.9 }}
+                            exit={{ opacity: 0, x: "-20px" }}
+                          >
+                            <span className="text-[20px] mr-4 ">
+                              Discipulado
+                            </span>
+                            <Separator className="w-screen absolute mt-6" />
+                          </motion.div>
+                        </NavigationMenuLink>
+                      </Link>
+                    </NavigationMenuItem>
+                  </NavigationMenuList>
+                </NavigationMenu>
+
+                <div className="absolute ml-4 rounded-full transition-transform duration-300 hover:scale-110 hover:shadow-lg">
                   {user.isSignedIn ? (
-                    <div>
-                      <motion.div
-                        initial={{ opacity: 0, x: "-20px" }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 1.0 }}
-                      >
-                        <UserButton afterSignOutUrl="/" />
-                      </motion.div>
-                    </div>
+                    <motion.div
+                      initial={{ opacity: 0, x: "-20px" }}
+                      animate={{
+                        opacity: isMenuOpen ? 1 : 0,
+                        x: isMenuOpen ? 0 : "-20px",
+                      }}
+                      transition={{ delay: 1.0 }}
+                      exit={{ opacity: 0, x: "-20px" }}
+                    >
+                      <UserButton afterSignOutUrl="/" />
+                    </motion.div>
                   ) : (
                     <Link href="/sign-in">
                       <motion.div
                         initial={{ opacity: 0, x: "-20px" }}
-                        animate={{ opacity: 1, x: 0 }}
+                        animate={{
+                          opacity: isMenuOpen ? 1 : 0,
+                          x: isMenuOpen ? 0 : "-20px",
+                        }}
                         transition={{ delay: 1.0 }}
+                        exit={{ opacity: 0, x: "-20px" }}
                       >
                         <Image
                           alt="Tailwind CSS Navbar component"
                           src="https://res.cloudinary.com/dn5ltihzv/image/upload/v1711566804/imagenes/iniciar%20sesion%20log.svg"
                           width={40}
                           height={30}
-                          className="border-2 rounded-full mt-20 ml-1 "
+                          className="border-2 rounded-full mt-5 flex justify-start"
                         />
                       </motion.div>
                     </Link>
                   )}
-                </Accordion>
-              </motion.div>
+                </div>
+              </div>
             )}
           </div>
         </div>
@@ -397,21 +403,23 @@ export const Navbar = () => {
                   </NavigationMenuItem>
                 </NavigationMenuList>
               </NavigationMenu>
-              {user.isSignedIn ? (
-                <div>
-                  <UserButton afterSignOutUrl="/" />
-                </div>
-              ) : (
-                <Link href="/sign-in">
-                  <Image
-                    alt="Tailwind CSS Navbar component"
-                    src="https://res.cloudinary.com/dn5ltihzv/image/upload/v1711566804/imagenes/iniciar%20sesion%20log.svg"
-                    width={40}
-                    height={30}
-                    className="border-2 rounded-full mt-3 ml-4"
-                  />
-                </Link>
-              )}
+              <div className="rounded-full transition-transform duration-300 hover:scale-110 hover:shadow-lg">
+                {user.isSignedIn ? (
+                  <div>
+                    <UserButton afterSignOutUrl="/" />
+                  </div>
+                ) : (
+                  <Link href="/sign-in">
+                    <Image
+                      alt="Tailwind CSS Navbar component"
+                      src="https://res.cloudinary.com/dn5ltihzv/image/upload/v1711566804/imagenes/iniciar%20sesion%20log.svg"
+                      width={40}
+                      height={30}
+                      className="border-2 rounded-full mt-3 ml-4"
+                    />
+                  </Link>
+                )}
+              </div>
             </ul>
           </div>
         </div>

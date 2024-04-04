@@ -27,14 +27,17 @@
   padding: var(--navbar-padding, 0.5rem);
   min-height: 4rem;
   width: 100%;
-  /* flex-direction: row-reverse;
-  justify-content: flex-end; */
+  flex-direction: row;
+    align-items: flex-start;
 }
 .menuVertical {
-  width: 100%;
-  min-height: 600px;
+  width: 1100px;
+  min-height: 530px;
   display: flex;
   background: #313131;
+  margin-left: -5px;
+  position: absolute
+  ;
 }
 
 
@@ -52,7 +55,7 @@
   position: absolute;
   content: "";
   background: #fff;
-  width: 50px;
+  width: 35px;
   height: 5px;
   border-radius: 5px;
   transition: all 400ms ease;
@@ -70,7 +73,6 @@
   display: none;
 }
 
-/* Ajuste en las reglas CSS para el estado checked del botón */
 .btnmenu:checked ~ .lblmenu .spn1 {
   transform: rotate(140deg);
   top: 10px;
